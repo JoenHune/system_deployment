@@ -26,16 +26,16 @@ then
 fi
 
 # 切换为期望的用户后继续操作
-echo expected_password | su - $expected_username << EOF
+su - $expected_username << EOF
 
 echo "hi, I am $USER"
 
 # # 删除不好用的软件
-# sudo api remove -y \
+# echo expected_password ｜ sudo api remove -y \
 #     vim-tiny
 
 # # 安装好用的软件
-# sudo apt install -y \
+# echo expected_password ｜ sudo apt install -y \
 #     git curl wget \
 #     tar gzip zip \
 #     cmake cmake-gui \
@@ -45,7 +45,7 @@ echo "hi, I am $USER"
 #     vim
 
 # ## 安装vscode
-# sudo snap install --classic code
+# echo expected_password ｜ sudo snap install --classic code
 
 # ## 设置默认的terminal为terminator（只影响快捷键Ctrl+Alt+T启动终端的情况）
 # gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/terminator
