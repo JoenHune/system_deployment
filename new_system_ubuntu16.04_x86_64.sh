@@ -4,7 +4,7 @@ expected_username="joen"
 expected_password=" "
 
 echo -n "Enter your sudo password:"
-read "$pw"
+read pw
 
 # 如果没有给定的用户，添加这个用户
 egrep "^$expected_username" /etc/passwd >& /dev/null
