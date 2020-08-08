@@ -1,6 +1,6 @@
 #!/bin/sh
 
-expected_username="joen"
+expected_username="test"
 expected_password=" "
 
 echo -n "Enter your sudo password:"
@@ -9,11 +9,19 @@ read pw
 # 如果没有给定的用户，添加这个用户
 egrep "^$expected_username" /etc/passwd >& /dev/null
 if [ $? -ne 0 ]; then
+    # 新建home目录
+    echo "Creating folder: /home/"$expected_username
     echo pw | sudo mkdir /home/$expected_username
-    echo pw | sudo useradd -d /home/$expected_username $expected_username
-    echo pw | sudo chown -R $expected_username /home/$expected_username
-    echo pw | sudo chgrp -R $expected_username /home/$expected_username
-    echo pw | sudo usermod -a -G sudo $expected_username
+    
+    # 新建用户
+    # echo "Adding user: "$expected_username
+    # echo pw | sudo useradd -d /home/$expected_username $expected_username
+    # echo expected_password | sudo passwd $expected_username
+
+    # 新用户赋权
+    # echo pw | sudo chown -R $expected_username /home/$expected_username
+    # echo pw | sudo chgrp -R $expected_username /home/$expected_username
+    # echo pw | sudo usermod -a -G sudo $expected_username
 fi
 
 # 切换为期望的用户后继续操作
@@ -79,4 +87,4 @@ curl -fsSL https://raw.github.com/JoenHune/system_deployment/master/terminator_c
 
 exit 0
 
-EOF
+# EOF
