@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bssh
 
 expected_username="joen"
 expected_password=" "
