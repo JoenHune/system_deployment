@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # 切换为期望的用户后继续操作
-echo expected_password | su - $expected_username << EOF
+# echo expected_password | su - $expected_username << EOF
 
 echo "hi, I am $USER"
 
@@ -43,8 +43,8 @@ echo "hi, I am $USER"
 # gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
 
 ## 配置terminator
-if [ ! -d "/home/$expected_username/.config/terminator" ]; then
-    mkdir -p /home/$expected_username/.config/terminator
+if [ ! -d "/home/$USER/.config/terminator" ]; then
+    mkdir -p /home/$USER/.config/terminator
 fi
 
 # # 如果已有原本的配置，则先备份
