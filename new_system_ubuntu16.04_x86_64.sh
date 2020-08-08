@@ -1,5 +1,11 @@
 #! /bin/sh
 
+expected_username="test"
+expected_password=" "
+
+echo "Enter your sudo password:"
+read pw
+
 # 删除不好用的软件
 # sudo api remove -y \
 #     vim-tiny
@@ -13,6 +19,15 @@
 #     zsh \
 #     terminator \
 #     vim
+
+if [ $USER != $expected_username]
+then
+    echo pw | sudo mkdir /home/$expected_username
+    echo pw | sudo useradd -d /home/$expected_username $expected_username
+    echo pw | sudo chown -R $expected_username /home/$expected_username
+    echo pw | sudo chgrp -R $expected_username /home/$expected_username
+    echo pw | sudo usermod -a -G sudo $expected_username
+fi
 
 # 切换为zsh并配置oh-my-zsh
 # chsh -s /bin/zsh
@@ -30,4 +45,7 @@ proxyoff () {
     unset https_proxy
     unset all_proxy
     echo \"http/https proxy off\"
-}" >> /home/joen/test.txt
+}" >> /home/$expected_username/test.txt
+
+
+exit 0
