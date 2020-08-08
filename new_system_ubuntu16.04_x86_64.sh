@@ -42,10 +42,10 @@ echo "hi, I am $USER"
 # gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/terminator
 # gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
 
-# ## 配置terminator
-# if [ ! -d "/home/$expected_username/.config/terminator" ]; then
-#     mkdir -p /home/$expected_username/.config/terminator
-# fi
+## 配置terminator
+if [ ! -d "/home/$expected_username/.config/terminator" ]; then
+    mkdir -p /home/$expected_username/.config/terminator
+fi
 
 # # 如果已有原本的配置，则先备份
 # if [ -f "/home/$expected_username/.config/terminator/config" ]; then
