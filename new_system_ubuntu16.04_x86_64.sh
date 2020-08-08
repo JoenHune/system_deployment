@@ -20,7 +20,7 @@ read pw
 #     terminator \
 #     vim
 
-if [ $USER != $expected_username]
+if [ "$USER" -ne $expected_username]
 then
     echo pw | sudo mkdir /home/$expected_username
     echo pw | sudo useradd -d /home/$expected_username $expected_username
