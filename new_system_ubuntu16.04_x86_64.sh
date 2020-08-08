@@ -82,5 +82,3 @@ proxyoff () {
 }" >> /home/$expected_username/.zshrc
 
 exit 0
-
-EOF
