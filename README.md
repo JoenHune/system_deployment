@@ -4,5 +4,5 @@
 
 ```
 sudo apt install -y curl
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.github.com/JoenHune/system_deployment/master/new_system_ubuntu16.04_x86_64.sh"
 ```
