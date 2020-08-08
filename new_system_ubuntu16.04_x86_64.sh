@@ -3,7 +3,7 @@
 expected_username="test"
 expected_password=" "
 
-echo "Enter your sudo password:"
+echo -n "Enter your sudo password:"
 read pw
 
 # 删除不好用的软件
