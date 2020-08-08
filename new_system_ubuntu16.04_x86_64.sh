@@ -17,7 +17,7 @@ then
     # 新建用户
     echo "Adding user: "$expected_username
     echo pw | sudo useradd -d /home/$expected_username $expected_username
-    echo expected_password | sudo passwd $expected_username
+    echo $expected_password | sudo passwd $expected_username
 
     # 新用户赋权
     echo pw | sudo chown -R $expected_username /home/$expected_username
@@ -26,11 +26,11 @@ then
 fi
 
 # 删除不好用的软件
-echo expected_password ｜ sudo api remove -y \
+echo $expected_password ｜ sudo api remove -y \
     vim-tiny
 
 # 安装好用的软件
-echo expected_password ｜ sudo apt install -y \
+echo $expected_password ｜ sudo apt install -y \
     git curl wget \
     tar gzip zip \
     cmake cmake-gui \
@@ -64,7 +64,7 @@ fi
 curl -fsSL https://raw.github.com/JoenHune/system_deployment/master/terminator_config > $terminator_config_file
 
 ## 切换为zsh并配置oh-my-zsh
-echo $expected_password | su - $expected_username -c "chsh -s /bin/zsh; sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+su - $expected_username -c "chsh -s /bin/zsh; sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
 
 ## 为科学服务
 echo "proxyon () {
