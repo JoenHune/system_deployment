@@ -12,25 +12,25 @@ if [ $? -ne 0 ]
 then
     # 新建home目录
     echo "Creating folder: /home/"$expected_username
-    echo pw | sudo mkdir /home/$expected_username
+    echo pw | sudo -S mkdir /home/$expected_username
     
     # 新建用户
     echo "Adding user: "$expected_username
-    echo pw | sudo useradd -d /home/$expected_username $expected_username
-    echo $expected_password | sudo passwd $expected_username
+    echo pw | sudo -S useradd -d /home/$expected_username $expected_username
+    echo $expected_password | sudo -S passwd $expected_username
 
     # 新用户赋权
-    echo pw | sudo chown -R $expected_username /home/$expected_username
-    echo pw | sudo chgrp -R $expected_username /home/$expected_username
-    echo pw | sudo usermod -a -G sudo $expected_username
+    echo pw | sudo -S chown -R $expected_username /home/$expected_username
+    echo pw | sudo -S chgrp -R $expected_username /home/$expected_username
+    echo pw | sudo -S usermod -a -G sudo $expected_username
 fi
 
 # 删除不好用的软件
-echo $expected_password ｜ sudo api remove -y \
+echo $expected_password ｜ sudo -S apt remove -y \
     vim-tiny
 
 # 安装好用的软件
-echo $expected_password ｜ sudo apt install -y \
+echo $expected_password ｜ sudo -S apt install -y \
     git curl wget \
     tar gzip zip \
     cmake cmake-gui \
@@ -40,7 +40,7 @@ echo $expected_password ｜ sudo apt install -y \
     vim
 
 ## 安装vscode
-echo expected_password ｜ sudo snap install --classic code
+echo $expected_password ｜ sudo -S snap install --classic code
 
 ## 设置默认的terminal为terminator（只影响快捷键Ctrl+Alt+T启动终端的情况）
 gsettings set org.gnome.desktop.default-applications.terminal exec /usr/bin/terminator
@@ -64,7 +64,7 @@ fi
 curl -fsSL https://raw.github.com/JoenHune/system_deployment/master/terminator_config > $terminator_config_file
 
 ## 切换为zsh并配置oh-my-zsh
-su - $expected_username -c "chsh -s /bin/zsh; sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+exec su $expected_username -c "chsh -s -y /bin/zsh; sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
 
 ## 为科学服务
 echo "proxyon () {
