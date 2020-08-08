@@ -8,7 +8,8 @@ read pw
 
 # 如果没有给定的用户，添加这个用户
 egrep "^$expected_username" /etc/passwd >& /dev/null
-if [ $? -ne 0 ]; then
+if [ $? -ne 0 ]
+then
     # 新建home目录
     echo "Creating folder: /home/"$expected_username
     echo pw | sudo mkdir /home/$expected_username
@@ -53,13 +54,15 @@ echo "hi, I am $USER"
 ## 配置terminator
 terminator_config_folder="/home/$USER/.config/terminator/"
 terminator_config_file="/home/$USER/.config/terminator/config"
-if [ ! -d $terminator_config_folder ]; then
+if [ ! -d $terminator_config_folder ]
+then
     echo "Creating folder: "$terminator_config_folder
     mkdir -p $terminator_config_folder
 fi
 
 # # 如果已有原本的配置，则先备份
-if [ -f $terminator_config_file ]; then
+if [ -f $terminator_config_file ]
+then
     echo "Backing up file: "$terminator_config_file
     mv $terminator_config_file $terminator_config_file".backup"
 fi
@@ -87,4 +90,4 @@ curl -fsSL https://raw.github.com/JoenHune/system_deployment/master/terminator_c
 
 exit 0
 
-# EOF
+EOF
