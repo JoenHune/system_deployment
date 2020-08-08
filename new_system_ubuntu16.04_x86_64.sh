@@ -18,4 +18,16 @@
 # chsh -s /bin/zsh
 # sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-echo "proxyon () {\n    export http_proxy=http://127.0.0.1:7890\n    export https_proxy=https://127.0.0.1:7890\n    export all_proxy=socks5://127.0.0.1:7981\n    echo \"http/https proxy on\"\n}\n\nproxyoff () {\n    unset http_proxy\n    unset https_proxy\n    unset all_proxy\n\n    echo \"http/https proxy off\"\n}" >> /home/joen/test.txt
+echo "proxyon () {
+    export http_proxy=http://127.0.0.1:7890
+    export https_proxy=https://127.0.0.1:7890
+    export all_proxy=socks5://127.0.0.1:7981
+    echo \"http/https proxy on\"
+}
+
+proxyoff () {
+    unset http_proxy
+    unset https_proxy
+    unset all_proxy
+    echo \"http/https proxy off\"
+}" >> /home/joen/test.txt
