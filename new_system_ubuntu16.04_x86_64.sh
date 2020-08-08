@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # 切换为期望的用户后继续操作
-# echo expected_password | su - $expected_username << EOF
+echo expected_password | su - $expected_username << EOF
 
 echo "hi, I am $USER"
 
@@ -43,15 +43,19 @@ echo "hi, I am $USER"
 # gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
 
 ## 配置terminator
-if [ ! -d "/home/$USER/.config/terminator" ]; then
-    mkdir -p /home/$USER/.config/terminator
+terminator_config_folder="/home/$USER/.config/terminator/"
+terminator_config_file="/home/$USER/.config/terminator/config"
+if [ ! -d $terminator_config_folder ]; then
+    echo "Creating folder: "$terminator_config_folder
+    mkdir -p $terminator_config_folder
 fi
 
 # # 如果已有原本的配置，则先备份
-# if [ -f "/home/$expected_username/.config/terminator/config" ]; then
-#     mv "/home/$expected_username/.config/terminator/config" "/home/$expected_username/.config/terminator/config.backup"
-# fi
-curl -fsSL https://raw.github.com/JoenHune/system_deployment/master/terminator_config > ~/.config/terminator/config
+if [ -f $terminator_config_file ]; then
+    echo "Backing up file: "$terminator_config_file
+    mv $terminator_config_file $terminator_config_file".backup"
+fi
+curl -fsSL https://raw.github.com/JoenHune/system_deployment/master/terminator_config > $terminator_config_file
 
 # ## 切换为zsh并配置oh-my-zsh
 # chsh -s /bin/zsh
